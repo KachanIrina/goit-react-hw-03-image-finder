@@ -56,6 +56,7 @@ export class App extends Component {
     return (
       <div
         style={{
+          paddingBottom: 20,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',

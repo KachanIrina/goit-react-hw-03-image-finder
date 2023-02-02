@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import css from './Modal.module.css';
+import propTypes from 'prop-types';
 
 export class Modal extends Component {
   componentDidMount() {
@@ -8,15 +9,23 @@ export class Modal extends Component {
   componentWillUnmount() {
     window.addEventListener('keydown', this.onCloseByEsc);
   }
+
   onCloseByEsc = e => {
     if (e.code === 'Escape') {
       this.props.onClose();
     }
   };
+
+  onCloseByOverlay = e => {
+    if (e.currentTarget === e.target) {
+      this.props.onClose();
+    }
+  };
+
   render() {
-    const { largeImg, onClose } = this.props;
+    const { largeImg } = this.props;
     return (
-      <div className={css.Overlay} onClick={onClose}>
+      <div className={css.Overlay} onClick={this.onCloseByOverlay}>
         <div className={css.Modal}>
           <img src={largeImg} alt="" />
         </div>
@@ -24,3 +33,7 @@ export class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  onClick: propTypes.func,
+};
