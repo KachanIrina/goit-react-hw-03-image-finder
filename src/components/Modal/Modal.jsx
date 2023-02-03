@@ -7,7 +7,7 @@ export class Modal extends Component {
     window.addEventListener('keydown', this.onCloseByEsc);
   }
   componentWillUnmount() {
-    window.addEventListener('keydown', this.onCloseByEsc);
+    window.removeEventListener('keydown', this.onCloseByEsc);
   }
 
   onCloseByEsc = e => {
